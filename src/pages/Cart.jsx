@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import CartItem from '../components/CartItem';
 
 const Cart = () => {
 	const { cart } = useSelector((state) => state);
+	const [totalAmount, setTotalAmount] = useState(0);
+
+	useEffect(() => {
+		setTotalAmount(cart.reduce((acc, curr) => acc + curr.price, 0));
+	}, [cart]);
 
 	return (
 		<div>
@@ -21,17 +28,24 @@ const Cart = () => {
 					</div>
 
 					<div>
-            <div>Your Cart</div>
-            <div>Summary</div>
-            <p></p>
-          </div>
+						<div>Your Cart</div>
+						<div>Summary</div>
+						<p>
+							<span>Total Items : {cart.length}</span>
+						</p>
+					</div>
+
+					<div>
+						<p>Total Amount:${totalAmount}</p>
+						<button></button>
+					</div>
 				</div>
 			) : (
 				<div>
 					<h1>Cart Empty</h1>
-					<Link to="/">
+					<NavLink to="/">
 						<button>SHOP NOW</button>
-					</Link>
+					</NavLink>
 				</div>
 			)}
 		</div>
