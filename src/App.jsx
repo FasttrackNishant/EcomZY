@@ -5,8 +5,8 @@ import Navbar from './components/Navbar';
 
 const App = () => {
 	return (
-		<div>
-			<div>
+		<div className='h-screen '>
+			<div className='bg-slate-900'>
 				<Navbar />
 			</div>
 
